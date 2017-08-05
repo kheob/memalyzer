@@ -57,6 +57,8 @@ export default class Submission extends Component {
     }
 
     uploadImage(event) {
+        this.props.setLoading(true);
+
         // Create a root reference
         var storageRef = firebase.storage().ref().child("upload");
         var file = document.getElementById("upload").files[0]; // use the Blob or File API
