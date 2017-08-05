@@ -42,11 +42,14 @@ export default class Submission extends Component {
 
     submitLink() {
         if (this.state.url !== "") {
+            this.props.setLoading(true);
+
             // Submit to server
             const requestUrl = "https://memalyzer-classification.azurewebsites.net/api/HttpTriggerJS1?code=oWa3gWLuqJfUZNYDzNEkv8UM8U9cuAU2mTnEQXgF66SO/LFGi/7bWw==&url=";
             $.get(requestUrl + this.state.url).then(data => {
                 this.props.updateUrl(this.state.url);
                 this.props.updateData(data);
+                this.props.setLoading(false);
 
                 console.log(data);
             });

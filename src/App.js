@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Grid, Col, Row } from 'react-bootstrap';
+import LoadingIndicator from 'react-loading-indicator';
 
 // Components
 import Submission from './components/Submission';
@@ -13,11 +14,26 @@ class App extends Component {
     super();
     this.state = {
       url: "",
-      data: {}
+      data: {},
+      showLoading: false
     };
   }
 
   render() {
+    let result;
+    let loading;
+
+    if (this.state.showLoading) {
+      loading = <LoadingIndicator />;
+    }
+
+    if (Object.keys(this.state.data).length > 0) {
+      result = <Row style={{display: "flex"}}>
+            <Meme image={this.state.url} data={this.state.data} />
+            <Response description={this.state.data["Description"]} />
+          </Row>;
+    }
+
     return (
       <div className="App">
         <div className="App-header">
@@ -26,12 +42,10 @@ class App extends Component {
         
         <Grid style={{paddingTop: "10px"}}>
           <Row>
-            <Submission updateUrl={this.updateUrl.bind(this)} updateData={this.updateData.bind(this)} />
+            <Submission updateUrl={this.updateUrl.bind(this)} updateData={this.updateData.bind(this)} setLoading={this.setLoading.bind(this)} />
           </Row>
-          <Row style={{display: "flex"}}>
-            <Meme image={this.state.url} data={this.state.data} />
-            <Response description={this.state.data["Description"]} />
-          </Row>
+          {loading}
+          {result}
         </Grid>
       </div>
     );
@@ -46,6 +60,12 @@ class App extends Component {
   updateData(data) {
     this.setState({
       data: data
+    });
+  }
+
+  setLoading(state) {
+    this.setState({
+      showLoading: state
     });
   }
 }
