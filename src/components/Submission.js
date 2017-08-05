@@ -30,6 +30,8 @@ export default class Submission extends Component {
                         event.target.value = null;
                     }}
                 /> 
+
+                {this.state.url}
             </FormGroup>
         );
     }
@@ -46,6 +48,7 @@ export default class Submission extends Component {
 
             // Submit to server
             const requestUrl = "https://memalyzer-classification.azurewebsites.net/api/HttpTriggerJS1?code=oWa3gWLuqJfUZNYDzNEkv8UM8U9cuAU2mTnEQXgF66SO/LFGi/7bWw==&url=";
+
             $.get(requestUrl + this.state.url).then(data => {
                 this.props.updateUrl(this.state.url);
                 this.props.updateData(data);
@@ -64,6 +67,7 @@ export default class Submission extends Component {
         var file = document.getElementById("upload").files[0]; // use the Blob or File API
         let thisRef = this;
         storageRef.put(file).then(function(snapshot) {
+
             thisRef.setState({
                 url: snapshot.downloadURL
             });
