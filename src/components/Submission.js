@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Grid, Row, Col, FormGroup, InputGroup, FormControl, Button } from 'react-bootstrap';
 import $ from 'jquery';
 
+/*global AzureStorage*/
+
 export default class Submission extends Component {
     constructor() {
         super();
@@ -19,6 +21,15 @@ export default class Submission extends Component {
                         <Col xs={3}><Button style={{width: "100%"}} onClick={this.submitLink.bind(this)}>Go</Button></Col>
                         </Row></Grid>
                 </InputGroup>
+
+                <input id="upload" ref="upload" type="file" accept="image/*"
+                    onChange={(event)=> { 
+                        this.uploadImage(event); 
+                    }}
+                    onClick={(event)=> { 
+                        event.target.value = null;
+                    }}
+                />
             </FormGroup>
         );
     }
@@ -36,7 +47,28 @@ export default class Submission extends Component {
             $.get(requestUrl + this.state.url).then(data => {
                 this.props.updateUrl(this.state.url);
                 this.props.updateData(data);
+
+                console.log(data);
             });
         }
+    }
+
+    uploadImage(event) {
+        // your account and SAS information
+        var fileUri = 'https://memalyzer.file.core.windows.net/';
+        var fileService = AzureStorage.createFileServiceWithSas(fileUri, 'tzDH4lCGh7u3pRnGiIkHnwrH4q5GThK1xGJe0Mub4eKq8fDfKVxVj6vczrLT/J+duI5k1zyxrZPXQUDE7uokUA==');
+
+        let files = document.getElementById("upload").files;
+        let file = files[0];
+
+        var speedSummary = fileService.createFileFromBrowserFile('myfileshare', 'mydirectory', file.name, file, {}, function(error, result, response) {
+            if (error) {
+                // Upload file failed
+                console.log(error);
+            } else {
+                // Upload successfully
+                console.log("Success!");
+            }
+        });
     }
 }

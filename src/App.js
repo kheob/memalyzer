@@ -30,7 +30,7 @@ class App extends Component {
           </Row>
           <Row style={{display: "flex"}}>
             <Meme image={this.state.url} data={this.state.data} />
-            <Response />
+            <Response description={this.state.data["Description"]} />
           </Row>
         </Grid>
       </div>
