@@ -21,7 +21,7 @@ export default class Meme extends Component {
                 <div style={style}>
                     <div>
                         <h4><strong>Meme description:</strong></h4>
-                        <p>{this.props.description}</p>
+                        <a href={this.props.description} target="_blank">{this.props.description}</a>
                         <p>{this.props.topic}</p>
                         <p>{this.props.sentiment}</p>
                     </div>

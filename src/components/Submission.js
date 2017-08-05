@@ -22,14 +22,14 @@ export default class Submission extends Component {
                         </Row></Grid>
                 </InputGroup>
 
-                <input id="upload" ref="upload" type="file" accept="image/*"
+                {/* <input id="upload" ref="upload" type="file" accept="image/*"
                     onChange={(event)=> { 
                         this.uploadImage(event); 
                     }}
                     onClick={(event)=> { 
                         event.target.value = null;
                     }}
-                />
+                /> */}
             </FormGroup>
         );
     }
