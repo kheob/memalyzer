@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Grid, Row, Col, FormGroup, InputGroup, FormControl, Button } from 'react-bootstrap';
 import $ from 'jquery';
 
-/*global AzureStorage*/
+/*global firebase*/
 
 export default class Submission extends Component {
     constructor() {
@@ -22,14 +22,14 @@ export default class Submission extends Component {
                         </Row></Grid>
                 </InputGroup>
 
-                {/* <input id="upload" ref="upload" type="file" accept="image/*"
+                 <input id="upload" ref="upload" type="file" accept="image/*"
                     onChange={(event)=> { 
                         this.uploadImage(event); 
                     }}
                     onClick={(event)=> { 
                         event.target.value = null;
                     }}
-                /> */}
+                /> 
             </FormGroup>
         );
     }
@@ -57,21 +57,32 @@ export default class Submission extends Component {
     }
 
     uploadImage(event) {
-        // your account and SAS information
-        var fileUri = 'https://memalyzer.file.core.windows.net/';
-        var fileService = AzureStorage.createFileServiceWithSas(fileUri, 'tzDH4lCGh7u3pRnGiIkHnwrH4q5GThK1xGJe0Mub4eKq8fDfKVxVj6vczrLT/J+duI5k1zyxrZPXQUDE7uokUA==');
-
-        let files = document.getElementById("upload").files;
-        let file = files[0];
-
-        var speedSummary = fileService.createFileFromBrowserFile('myfileshare', 'mydirectory', file.name, file, {}, function(error, result, response) {
-            if (error) {
-                // Upload file failed
-                console.log(error);
-            } else {
-                // Upload successfully
-                console.log("Success!");
-            }
+        // Create a root reference
+        var storageRef = firebase.storage().ref().child("upload");
+        var file = document.getElementById("upload").files[0]; // use the Blob or File API
+        let thisRef = this;
+        storageRef.put(file).then(function(snapshot) {
+            thisRef.setState({
+                url: snapshot.downloadURL
+            });
+            thisRef.submitLink();
         });
+
+        // // your account and SAS information
+        // var fileUri = 'https://memalyzer.file.core.windows.net/';
+        // var fileService = AzureStorage.createFileServiceWithSas(fileUri, 'tzDH4lCGh7u3pRnGiIkHnwrH4q5GThK1xGJe0Mub4eKq8fDfKVxVj6vczrLT/J+duI5k1zyxrZPXQUDE7uokUA==');
+
+        // let files = document.getElementById("upload").files;
+        // let file = files[0];
+
+        // var speedSummary = fileService.createFileFromBrowserFile('myfileshare', 'mydirectory', file.name, file, {}, function(error, result, response) {
+        //     if (error) {
+        //         // Upload file failed
+        //         console.log(error);
+        //     } else {
+        //         // Upload successfully
+        //         console.log("Success!");
+        //     }
+        // });
     }
 }
