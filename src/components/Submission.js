@@ -65,8 +65,11 @@ export default class Submission extends Component {
     uploadImage(event) {
         this.props.setLoading(true);
 
+        let randomText = makeid();
+        console.log(randomText);
+
         // Create a root reference
-        var storageRef = firebase.storage().ref().child("upload");
+        var storageRef = firebase.storage().ref().child("upload/" + randomText);
         var file = document.getElementById("upload").files[0]; // use the Blob or File API
         let thisRef = this;
         storageRef.put(file).then(function(snapshot) {
@@ -94,4 +97,14 @@ export default class Submission extends Component {
         //     }
         // });
     }
+}
+
+function makeid() {
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  for (var i = 0; i < 20; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  return text;
 }
