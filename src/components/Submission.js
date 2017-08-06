@@ -18,7 +18,7 @@ export default class Submission extends Component {
                 <InputGroup style={{width: "100%"}}>
                     <Grid><Row>
                         <Col xs={12}><FormControl type="text" placeholder="Image URL" style={{borderTopLeftRadius: "2px", borderTopRightRadius: "2px", border: "none", height: "40px"}} onChange={this.updateUrl.bind(this)} /></Col>
-                        <Col xs={12}><Button style={{width: "100%", borderRadius: "0px", border: "none", height: "40px", backgroundImage: "none", backgroundColor: "#008975", textShadow: "none", color: "white"}} onClick={this.submitLink.bind(this)}>Go</Button></Col>
+                        <Col xs={12}><Button style={{width: "100%", borderRadius: "0px", border: "none", height: "40px", backgroundImage: "none", backgroundColor: "#008975", textShadow: "none", color: "white"}} onClick={this.submitLink.bind(this)}>Submit</Button></Col>
                         <Col xs={12}><Button onClick={this.clickUpload.bind(this)} style={{width: "100%", borderRadius: "0px", borderBottomLeftRadius: "2px", borderBottomRightRadius: "2px", border: "none", height: "40px", backgroundImage: "none", backgroundColor: "#008975", textShadow: "none", color: "white"}} >Upload Image</Button></Col>
                         </Row></Grid>
                 </InputGroup>

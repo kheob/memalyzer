@@ -15,7 +15,7 @@ export default class Meme extends Component {
         }
         return (
             <Col sm={6}>
-                <Well style={{borderRadius: "2px", border: "none", backgroundColor: "rgba(255, 255, 255, 1)", backgroundImage: "none"}}>
+                <Well style={{borderRadius: "2px", border: "none", backgroundColor: "rgba(255, 255, 255, 1)", backgroundImage: "none", paddingBottom: "30px"}}>
                     <img src={this.props.image} style={{width: "100%", display: "block", margin: "auto"}}/>
                     {meme}
 
@@ -32,7 +32,8 @@ export default class Meme extends Component {
                 value: this.props.data["Probability"],
                 size: 140,
                 fill: {
-                gradient: ["#00BF9A", "#008975"]
+                gradient: ["#00BF9A", "#008975"],
+                thickness: 30
                 }
             }).on('circle-animation-progress', function(event, progress) {
                 $(this).find('strong').html(parseInt(thisRef.props.data["Probability"] * 100) + "<i>%</i>");
@@ -47,7 +48,8 @@ export default class Meme extends Component {
                 value: this.props.data["Probability"],
                 size: 140,
                 fill: {
-                gradient: ["#00BF9A", "#008975"]
+                gradient: ["#00BF9A", "#008975"],
+                thickness: 30
                 }
             }).on('circle-animation-progress', function(event, progress) {
                 $(this).find('strong').html(parseInt(thisRef.props.data["Probability"] * 100) + "<i>%</i>");
