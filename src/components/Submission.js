@@ -69,7 +69,7 @@ export default class Submission extends Component {
         console.log(randomText);
 
         // Create a root reference
-        var storageRef = firebase.storage().ref().child("upload/" + randomText);
+        var storageRef = firebase.storage().ref().child("upload");
         var file = document.getElementById("upload").files[0]; // use the Blob or File API
         let thisRef = this;
         storageRef.put(file).then(function(snapshot) {
