@@ -20,7 +20,8 @@ class App extends Component {
   }
 
   render() {
-    let result;
+    let result = <Row style={{color: "white", paddingTop: "28px"}}><Col xs={12}><p>Memalyzer uses cutting edge machine learning to help you better understand and react to memes.</p>
+    <p>To get started, upload a meme!</p><p style={{fontSize: "20px"}}>😂😂😂</p></Col></Row>;
     let loading;
 
     if (this.state.showLoading) {
