@@ -24,20 +24,20 @@ class App extends Component {
     let loading;
 
     if (this.state.showLoading) {
-      loading = <LoadingIndicator />;
+      loading = <LoadingIndicator style={{marginTop: "10px", marginBottom: "20px"}} />;
     }
 
-    if (Object.keys(this.state.data).length > 0) {
-      result = <Row style={{display: "flex"}}>
+    if (Object.keys(this.state.data).length > 0 && !this.state.showLoading) {
+      result = <Row>
             <Meme image={this.state.url} data={this.state.data} />
-            <Response description={this.state.data["Description"]} />
+            <Response description={this.state.data["Description"]} url={this.state.data["Url"]} />
           </Row>;
     }
 
     return (
       <div className="App">
-        <div className="App-header">
-          <h2>Memalyzer</h2>
+        <div className="App-header" style={{backgroundColor: "#00BF9A"}}>
+          <h1 style={{fontSize: "50px"}}>Memalyzer</h1>
         </div>
         
         <Grid style={{paddingTop: "10px"}}>

@@ -17,11 +17,14 @@ export default class Meme extends Component {
 
         let style = {/*backgroundColor: backgroundColor,*/ padding: "20px", borderRadius: "4px", /*border: border,*/ height: "100%"};
         return (
-            <Col xs={6} style={{marginBottom: "20px"}}>
+            <Col sm={6} style={{marginBottom: "20px"}}>
                 <div style={style}>
                     <div>
                         <h4><strong>Meme description:</strong></h4>
-                        <a href={this.props.description} target="_blank">{this.props.description}</a>
+                        <p>{this.props.description}</p>
+                        <br />
+                        <h4><strong>More info:</strong></h4>
+                        <a href={this.props.url} target="_blank">{this.props.url}</a>
                         <p>{this.props.topic}</p>
                         <p>{this.props.sentiment}</p>
                     </div>
